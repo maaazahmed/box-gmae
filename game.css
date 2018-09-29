@@ -1,0 +1,20 @@
+table{
+    border-collapse: collapse;
+    border-spacing:0px;
+    box-shadow: none;
+    margin-top: 20px 
+
+}
+
+
+td{
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    border-width: 5px;
+    box-shadow: none;
+    border: solid 5px rgb(218, 217, 217);
+    background-color: #f2f2f2
+
+}
+

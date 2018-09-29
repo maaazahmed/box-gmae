@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0px;
+        height: auto;
+        width: auto;
+        background-color: #f3f3f3
+    }
+
+    .input-container {
+        /* background-color: #fff; */
+        margin: 100px auto 0 auto;
+        width: 30%
+    }
+
+    input {
+        width: 100%;
+        outline: none;
+        height: 20px;
+        margin: 10px 0px 10px 0px;
+        padding: 10px;
+        border: solid 2px gray;
+        color: gray;
+        border-radius: 5px
+    }
+
+    .button-container {
+        /* background-color: aqua; */
+        text-align: center;
+        width: 30%;
+        margin: auto
+    }
+
+    .button {
+        background: gray;
+        height: 40px;
+        text-align: center;
+        width: 40%;
+        /* outline: none; */
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+    <div>
+
+        <div class="input-container">
+            <input placeholder="Player 1" />
+            <br>
+            <input placeholder="Player 2" />
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="playGame()">Play game</button>
+            <button class="button">Score</button>
+        </div>
+
+    </div>
+    <Script>
+        var input = document.getElementsByTagName("input")
+        function playGame() {
+            var obj = { p1: input[0].value, p2: input[1].value }
+            if (obj.p1 !== obj.p2 && obj.p1 !== "" && obj.p2 !== "") {
+                localStorage.setItem("obj", JSON.stringify(obj))
+                location.assign("./Demo.html")
+            }
+            
+            else {
+                alert("Enter players name")
+            }
+            input[0].value = ""
+            input[1].value = ""
+        }
+
+    </Script>
+</body>
+
+</html>
