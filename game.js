@@ -1,6 +1,6 @@
 var table = document.getElementsByTagName("table")[0]
-let row = 2;
-let colm = 2;
+let row = 10;
+let colm = 10;
 var objName = JSON.parse(localStorage.getItem("obj"))
 var list = document.getElementsByTagName("li")
 var arr = []
@@ -57,10 +57,11 @@ var result_player_2 = document.getElementById("result_player_2")
 
 
 function setBox(ele) {
-    prvBox !== undefined ? tds[--prvBox].style.background = "#fff" : box = ele;
+    prvBox !== undefined ? tds[--prvBox].style.background = "#fff" : box = ele;    
     id = parseInt(box.getAttribute("id"))
     prvBox = id;
     box.style.backgroundColor = "gray"
+    hideButton(true)
 }
 
 const up = () => {
@@ -120,8 +121,22 @@ const left = () => {
 }
 
 
+let buttons = document.getElementsByTagName("button")
+const hideButton = (bool) => {
+    for (let i = 0; i < buttons.length; i++) {
+        if(bool){
+            buttons[i].removeAttribute("disabled")
+        }
+        else{
+            buttons[i].setAttribute("disabled", "disabled")
+        }
+    }
+}
+
+
 var playernaem = document.getElementById("playernaem")
 function scroring() {
+    hideButton(false)
     num % 2 === 0 ? p = player[0] : p = player[1]
     if (p === player[0]) {
         playernaem.innerHTML = player[1].name;
@@ -134,21 +149,21 @@ function scroring() {
     box.style.background = "#fff";
     if (box.style["border-color"] === color) {
         playernaem.innerHTML = p.name;
-        // playernaem.style.background = color
+        playernaem.style.color = p.color;
         ++p.box;
-        box.style.backgroundColor = p.color;
+        box.style.background = p.color;
         box.innerHTML = p.name.substring(0, 1);
-        box.removeAttribute("onclick")
-        prvBox = undefined;
-        --num
+        box.removeAttribute("onclick");
+        --num;
     }
+    prvBox = undefined;
     ++num
     // console.log(list)
     // list[0].innerHTML = "Total" + colm * row
     tss.innerHTML = "<ul>" +
-        "<li>" + colm * row + "</li>" +
-        "<li>" + player[0].name + " " + player[0].box + "</li>" +
-        "<li>" + player[1].name + " " + player[1].box + "</li>" +
+        "<li> Total = "+ " " + colm * row + "</li>" +
+        "<li>" + player[0].name + " = " + player[0].box + "</li>" +
+        "<li>" + player[1].name + " = " + player[1].box + "</li>" +
         "</ul>";
 
 
@@ -163,25 +178,14 @@ function scroring() {
         result_player_2.innerHTML = p_2;
 
         arr.unshift({
-            p1Name:player[0].name,
-            p2Name:player[1].name,
-            p1Box:player[0].box,
-            p2Box:player[1].box,
-            mar:  Map.max(player[0].box, player[1].box - Math.max(player[0].box, player[1].box))
+            p1Name: player[0].name,
+            p2Name: player[1].name,
+            p1Box: player[0].box,
+            p2Box: player[1].box,
+            mar: Map.max(player[0].box, player[1].box - Math.max(player[0].box, player[1].box))
         })
-        localStorage.setItem("score",JSON.stringify(arr));
+        localStorage.setItem("score", JSON.stringify(arr));
         localStorage.clear("obj");
-
-
-        // arr.unshift({
-        //     p1Name: player[0].name,
-        //     p2Name: player[1].name,
-        //     p1Box: player[0].box,
-        //     p2Box: player[1].box,
-        //     mar: Math.max(player[0].box, player[1].box) - Math.min(player[0].box, player[1].box)
-        // });
-        
-        // localStorage.clear("obj")
     }
 
 }
